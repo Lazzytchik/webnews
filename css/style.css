@@ -1,0 +1,8 @@
+div.newspaper{
+    max-width: 50%;
+    margin: auto;
+}
+
+div.newspaper p{
+    text-align: justify;
+}
