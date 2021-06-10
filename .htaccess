@@ -1,5 +1,7 @@
 AddDefaultCharset UTF-8
-RewriteEngine On    # Turn on the rewriting engine
+RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule    ^([A-Za-z0-9_-]+)$    products.php?id=$1    [NC,L]    # Handle page requests
+RewriteRule    ^news/([A-Za-z0-9_-]+)/([A-Za-zёЁА-Яа-яртуфхцчшщъыьэю0-9_-]+)$    articles.php?group=$1&category=$2    [NC,L]
+RewriteRule    ^news/([A-Za-z0-9_-]+)/$    articles.php?group=$1    [NC,L]
+RewriteRule    ^news/$    articles.php    [NC,L]

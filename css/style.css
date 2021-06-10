@@ -7,6 +7,18 @@ div.newspaper p{
     text-align: justify;
 }
 
+div.newspaper h2{
+    text-align: justify;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+div.newspaper p.date{
+    color: rgb(120, 120, 120);
+    font-size: 11px;
+    margin: 0;
+}
+
 /* Специальный стиль для выпадающего меню */
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600&subset=latin,cyrillic);

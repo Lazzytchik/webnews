@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>News</title>
-        <link href="css/style.css" rel="stylesheet" type="text/css">
+        <link href="/css/style.css" rel="stylesheet" type="text/css">
     </head>
     
     <body>
@@ -25,19 +25,26 @@
                         <li><a href="">меню второго уровня</a></li>
                     </ul>
                 </li>
-                <li><a href="">Компания</a></li>
-                <li><a href="">Блог</a></li>
-                <li><a href="">Контакты</a></li>
             </ul>
         </nav>
         
         <?php
+            
+            $group = $_GET['group'];
+            $category = $_GET['category'];
         
             require 'dbconfig.php';
             $db = new NewsDB('localhost', 'webnews');
             $db->connect('root', 'root');
-            
-            $query = $db->get_news('html', 'Классика');
+        
+            if ($group == null){
+                $query = $db->get_news();
+            } else if($category == null){
+                $query = $db->get_grouped_news($group);
+            } else{
+                $query = $db->get_gc_news($group, $category);
+            }
+        
             while($row = $query->fetch(PDO::FETCH_OBJ)){
                 require 'news_form.php';
             }
