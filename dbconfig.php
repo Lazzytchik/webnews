@@ -20,7 +20,7 @@
         //  Процедура для подключения к базе данных
         function connect($login, $password){
             $dsn = 'mysql:host='.$this->host.';dbname='.$this->dbname;
-            $this->pdo = new PDO($dsn, 'root', 'root', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+            $this->pdo = new PDO($dsn, 'root', 'root');
         }
         
         //  Функция, которая возващает результат запроса новостей по группе и категории
