@@ -10,32 +10,19 @@
     
     <body>
         
-        <nav>
-            <ul class="topmenu">
-                <li><a href="" class="active">Главная<span class="fa fa-angle-down"></span></a>
-                    <ul class="submenu">
-                        <li><a href="">меню второго уровня</a></li>
-                        <li><a href="">меню второго уровня<span class="fa fa-angle-down"></span></a>
-                            <ul class="submenu">
-                                <li><a href="">меню третьего уровня</a></li>
-                                <li><a href="">меню третьего уровня</a></li>
-                                <li><a href="">меню третьего уровня</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="">меню второго уровня</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-        
         <?php
-            
-            $group = $_GET['group'];
-            $category = $_GET['category'];
         
             require 'dbconfig.php';
             $db = new NewsDB('localhost', 'webnews');
             $db->connect('root', 'root');
+        
+            $groups = $db->get_groups();
+            $categories = $db->get_categories();
+        
+            require 'mainmenu.php';
+            
+            $group = $_GET['group'];
+            $category = $_GET['category'];
         
             if ($group == null){
                 $query = $db->get_news();

@@ -2,6 +2,6 @@ AddDefaultCharset UTF-8
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule    ^news/([A-Za-z0-9_-]+)/([A-Za-zёЁА-Яа-яртуфхцчшщъыьэю0-9_-]+)$    articles.php?group=$1&category=$2    [NC,L]
+RewriteRule    ^news/([A-Za-z0-9_-]+)/([A-Za-zёЁА-Яа-яртуфхцчшщъыьэю0-9_-]+)/$    articles.php?group=$1&category=$2    [NC,L]
 RewriteRule    ^news/([A-Za-z0-9_-]+)/$    articles.php?group=$1    [NC,L]
 RewriteRule    ^news/$    articles.php    [NC,L]

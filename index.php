@@ -10,39 +10,24 @@
     
     <body>
         
-        <nav>
-            <ul class="topmenu">
-                <li><a href="" class="active">Главная<span class="fa fa-angle-down"></span></a>
-                    <ul class="submenu">
-                        <li><a href="">меню второго уровня</a></li>
-                        <li><a href="">меню второго уровня<span class="fa fa-angle-down"></span></a>
-                            <ul class="submenu">
-                                <li><a href="">меню третьего уровня</a></li>
-                                <li><a href="">меню третьего уровня</a></li>
-                                <li><a href="">меню третьего уровня</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="">меню второго уровня</a></li>
-                    </ul>
-                </li>
-                <li><a href="">Компания</a></li>
-                <li><a href="">Блог</a></li>
-                <li><a href="">Контакты</a></li>
-            </ul>
-        </nav>
-        
-        <?php
+        <?
         
             require 'dbconfig.php';
             $db = new NewsDB('localhost', 'webnews');
             $db->connect('root', 'root');
-            
-            $query = $db->get_news('html', 'Классика');
-            while($row = $query->fetch(PDO::FETCH_OBJ)){
-                require 'news_form.php';
-            }
+        
+            $groups = $db->get_groups();
+            $categories = $db->get_categories();
+        
+            require 'mainmenu.php';
         
         ?>
+        
+        <div id='main'>
+            <h1> Добро пожаловать на тестовый новостной портал!</h1>
+            <p>На этом небольшом новостном портале вы можете найти новости в сфере веб-технологий на различные темы.</p>
+        </div>
+
         
     </body>
 </html>
