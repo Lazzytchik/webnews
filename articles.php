@@ -30,10 +30,10 @@
                 $count = $db->get_news()->rowCount();
             } else if($category == null){
                 $query = $db->get_grouped_news($group, $page);
-                $count = $db->get_grouped_news()->rowCount();
+                $count = $db->get_grouped_news($group)->rowCount();
             } else{
                 $query = $db->get_gc_news($group, $category, $page);
-                $count = $db->get_gc_news()->rowCount();
+                $count = $db->get_gc_news($group, $category)->rowCount();
             }
         
             $count = round($count / $db->limit, 0);

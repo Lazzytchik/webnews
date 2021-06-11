@@ -19,6 +19,19 @@ div.pagination{
     flex-direction: row;
 }
 
+div.pagination a{
+    text-decoration: none;
+}
+
+div.block{
+    border: 1px solid rgb(180, 180, 180);
+    padding: 1em;
+}
+
+div.selected{
+    background-color: antiquewhite;
+}
+
 div.newspaper p{
     text-align: justify;
 }
