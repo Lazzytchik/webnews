@@ -23,13 +23,14 @@
             
             $group = $_GET['group'];
             $category = $_GET['category'];
+            $page = $_GET['page'];
         
             if ($group == null){
-                $query = $db->get_news();
+                $query = $db->get_news($page);
             } else if($category == null){
-                $query = $db->get_grouped_news($group);
+                $query = $db->get_grouped_news($group, $page);
             } else{
-                $query = $db->get_gc_news($group, $category);
+                $query = $db->get_gc_news($group, $category, $page);
             }
         
             while($row = $query->fetch(PDO::FETCH_OBJ)){

@@ -11,6 +11,9 @@
         //  Ссылка на объект pdo
         private $pdo;
         
+        //  Количество выводимых записей
+        public $limit = 5;
+        
         //  Конструктор с установкой хоста и названия базы данных.
         function __construct($host, $dbname){
             $this->host = $host;
@@ -24,25 +27,38 @@
         }
         
         //  Функция, которая возващает результат запроса новостей по группе и категории
-        function get_gc_news($group, $category){
-            $news = "SELECT * FROM news JOIN categorized_news cn on news.id = cn.news_id WHERE group_name = :group and cat_name = :category ORDER by post_date DESC";
+        function get_gc_news($group, $category, $page){
+            $news = "SELECT * FROM news JOIN categorized_news cn on news.id = cn.news_id WHERE group_name = :group and cat_name = :category ORDER by post_date DESC LIMIT :limit OFFSET :start";
+            $offset = ($page - 1)*$this->limit;
             $query = $this->pdo->prepare($news);
-            $query->execute(['group' => $group, 'category' => $category]);
+            $query->bindValue('group', $group, PDO::PARAM_STR);
+            $query->bindValue('category', $category, PDO::PARAM_STR);
+            $query->bindValue('limit', $this->limit, PDO::PARAM_INT);
+            $query->bindValue('start', $offset, PDO::PARAM_INT);
+            $query->execute();
             return $query;
         }
         
         //  Функция, которая возващает результат запроса новостей по группе
-        function get_grouped_news($group){
-            $news = "SELECT * FROM news WHERE group_name = :group ORDER by post_date DESC";
+        function get_grouped_news($group, $page){
+            $news = "SELECT * FROM news WHERE group_name = :group ORDER by post_date DESC LIMIT :limit OFFSET :start";
+            $offset = ($page - 1)*$this->limit;
             $query = $this->pdo->prepare($news);
-            $query->execute(['group' => $group]);
+            $query->bindValue('group', $group, PDO::PARAM_STR);
+            $query->bindValue('limit', $this->limit, PDO::PARAM_INT);
+            $query->bindValue('start', $offset, PDO::PARAM_INT);
+            $query->execute();
             return $query;
         }
         
         //  Функция, которая возващает результат запроса новостей
-        function get_news(){
-            $news = "SELECT * FROM news ORDER by post_date DESC";
-            $query = $this->pdo->query($news);
+        function get_news($page){
+            $news = "SELECT * FROM news ORDER by post_date DESC LIMIT :limit OFFSET :start";
+            $offset = ($page - 1)*$this->limit;
+            $query = $this->pdo->prepare($news);
+            $query->bindValue('limit', $this->limit, PDO::PARAM_INT);
+            $query->bindValue('start', $offset, PDO::PARAM_INT);
+            $query->execute();
             return $query;
         }
         
