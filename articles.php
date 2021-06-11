@@ -23,19 +23,26 @@
             
             $group = $_GET['group'];
             $category = $_GET['category'];
-            $page = $_GET['page'];
+            $page = (int)$_GET['page'];
         
             if ($group == null){
                 $query = $db->get_news($page);
+                $count = $db->get_news()->rowCount();
             } else if($category == null){
                 $query = $db->get_grouped_news($group, $page);
+                $count = $db->get_grouped_news()->rowCount();
             } else{
                 $query = $db->get_gc_news($group, $category, $page);
+                $count = $db->get_gc_news()->rowCount();
             }
+        
+            $count = round($count / $db->limit, 0);
         
             while($row = $query->fetch(PDO::FETCH_OBJ)){
                 require 'news_form.php';
             }
+        
+            require 'pagination.php';
         
         ?>
         

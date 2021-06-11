@@ -12,6 +12,13 @@ div.newspaper{
     margin: auto;
 }
 
+div.pagination{
+    max-width: 600px;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+}
+
 div.newspaper p{
     text-align: justify;
 }

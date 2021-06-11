@@ -7,4 +7,4 @@ RewriteRule    ^news/([A-Za-z0-9_-]+)/([A-Za-zёЁА-Яа-яртуфхцчшщъ
 RewriteRule    ^news/([A-Za-z0-9_-]+)/$    articles.php?group=$1&page=1    [NC,L]
 RewriteRule    ^news/([A-Za-z0-9_-]+)/([0-9]+)$    articles.php?group=$1&page=$2    [NC,L]
 RewriteRule    ^news/$    articles.php?page=1    [NC,L]
-RewriteRule    ^news/([0-9]+)$    articles.php?page=$2    [NC,L]
+RewriteRule    ^news/([0-9]+)$    articles.php?page=$1    [NC,L]

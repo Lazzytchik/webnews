@@ -1,6 +1,6 @@
 <nav>
     <ul class="topmenu">
-        <li><a href="/" class="active">Главная<span class="fa fa-angle-down"></span></a>
+        <li><a href="/news/" class="active">Главная<span class="fa fa-angle-down"></span></a>
             <ul class="submenu">
                 <?php 
                     

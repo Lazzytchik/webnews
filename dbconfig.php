@@ -12,7 +12,7 @@
         private $pdo;
         
         //  Количество выводимых записей
-        public $limit = 5;
+        public $limit = 2;
         
         //  Конструктор с установкой хоста и названия базы данных.
         function __construct($host, $dbname){
@@ -27,37 +27,58 @@
         }
         
         //  Функция, которая возващает результат запроса новостей по группе и категории
-        function get_gc_news($group, $category, $page){
-            $news = "SELECT * FROM news JOIN categorized_news cn on news.id = cn.news_id WHERE group_name = :group and cat_name = :category ORDER by post_date DESC LIMIT :limit OFFSET :start";
-            $offset = ($page - 1)*$this->limit;
-            $query = $this->pdo->prepare($news);
+        //  Параметр page определяет на какой странице находятся данные. Если page = 0, то запрос происходит без лимита
+        function get_gc_news($group, $category, $page = 0){
+            $news = "SELECT * FROM news JOIN categorized_news cn on news.id = cn.news_id WHERE group_name = :group and cat_name = :category ORDER by post_date DESC";
+            $limitsql = "LIMIT :limit OFFSET :start";
+            if ($page > 0){
+                $news = $news.' '.$limitsql;
+                $offset = ($page - 1)*$this->limit;
+                $query = $this->pdo->prepare($news);
+                $query->bindValue('limit', $this->limit, PDO::PARAM_INT);
+                $query->bindValue('start', $offset, PDO::PARAM_INT);
+            } else {
+                $query = $this->pdo->prepare($news);
+            }
             $query->bindValue('group', $group, PDO::PARAM_STR);
             $query->bindValue('category', $category, PDO::PARAM_STR);
-            $query->bindValue('limit', $this->limit, PDO::PARAM_INT);
-            $query->bindValue('start', $offset, PDO::PARAM_INT);
             $query->execute();
             return $query;
         }
         
         //  Функция, которая возващает результат запроса новостей по группе
-        function get_grouped_news($group, $page){
-            $news = "SELECT * FROM news WHERE group_name = :group ORDER by post_date DESC LIMIT :limit OFFSET :start";
-            $offset = ($page - 1)*$this->limit;
-            $query = $this->pdo->prepare($news);
+        //  Параметр page определяет на какой странице находятся данные. Если page = 0, то запрос происходит без лимита
+        function get_grouped_news($group, $page = 0){
+            $news = "SELECT * FROM news WHERE group_name = :group ORDER by post_date DESC";
+            $limitsql = "LIMIT :limit OFFSET :start";
+            if ($page > 0){
+                $news = $news.' '.$limitsql;
+                $offset = ($page - 1)*$this->limit;
+                $query = $this->pdo->prepare($news);
+                $query->bindValue('limit', $this->limit, PDO::PARAM_INT);
+                $query->bindValue('start', $offset, PDO::PARAM_INT);
+            } else {
+                $query = $this->pdo->prepare($news);
+            }
             $query->bindValue('group', $group, PDO::PARAM_STR);
-            $query->bindValue('limit', $this->limit, PDO::PARAM_INT);
-            $query->bindValue('start', $offset, PDO::PARAM_INT);
             $query->execute();
             return $query;
         }
         
         //  Функция, которая возващает результат запроса новостей
-        function get_news($page){
-            $news = "SELECT * FROM news ORDER by post_date DESC LIMIT :limit OFFSET :start";
-            $offset = ($page - 1)*$this->limit;
-            $query = $this->pdo->prepare($news);
-            $query->bindValue('limit', $this->limit, PDO::PARAM_INT);
-            $query->bindValue('start', $offset, PDO::PARAM_INT);
+        //  Параметр page определяет на какой странице находятся данные. Если page = 0, то запрос происходит без лимита
+        function get_news($page = 0){
+            $news = "SELECT * FROM news ORDER by post_date DESC";
+            $limitsql = "LIMIT :limit OFFSET :start";
+            if ($page > 0){
+                $news = $news.' '.$limitsql;
+                $offset = ($page - 1)*$this->limit;
+                $query = $this->pdo->prepare($news);
+                $query->bindValue('limit', $this->limit, PDO::PARAM_INT);
+                $query->bindValue('start', $offset, PDO::PARAM_INT);
+            } else {
+                $query = $this->pdo->prepare($news);
+            }
             $query->execute();
             return $query;
         }
