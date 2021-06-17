@@ -97,6 +97,14 @@
             return $query;
         }
         
+        function get_news_categories($news_id){
+            $sql = "SELECT cat_name, ru_name FROM `news` JOIN `categorized_news` cn ON news.id = cn.news_id JOIN `categories` c ON cn.cat_name = c.name WHERE id = :id";
+            $query = $this->pdo->prepare($sql);
+            $query->bindValue('id', $news_id, PDO::PARAM_INT);
+            $query->execute();
+            return $query;
+        }
+        
     }
 
     

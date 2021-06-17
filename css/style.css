@@ -17,6 +17,7 @@ div.pagination{
     margin: auto;
     display: flex;
     flex-direction: row;
+    justify-content: center;
 }
 
 div.pagination a{
@@ -47,6 +48,33 @@ div.newspaper p.date{
     font-size: 11px;
     margin: 0;
 }
+
+div.newspaper .tags{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+div.newspaper .tags .group{
+    padding: 7px;
+    background-color: rgb(220, 150, 150);
+    margin-right: 5px;
+}
+
+div.newspaper .tags .category{
+    padding: 7px;
+    background-color: rgb(220, 200, 170);
+    margin-right: 5px;
+}
+
+.tags p{
+    font-size: 12px;
+}
+
+ul.groups-list li a{
+    text-decoration: none;
+}
+
 
 /* Специальный стиль для выпадающего меню */
 
