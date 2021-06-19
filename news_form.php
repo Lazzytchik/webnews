@@ -4,11 +4,11 @@
 <div class="newspaper">
     <h2><?php echo $row->title ?></h2>
     <div class="tags">
-        <p class="group"><?php echo $row->group_name?></p>
+        <a href=<?php echo "/news/group-".$row->group_name."/" ?>><p class="group"><?php echo $row->group_name?></p></a>
         <?php
             $ncats = $db->get_news_categories($row->id);
             while($inrow = $ncats->fetch(PDO::FETCH_OBJ)){
-                echo ('<p class="category">'.$inrow->ru_name.'</p>') ;
+                echo ('<a href="/news/group-'.$row->group_name.'/'.$inrow->cat_name.'/"><p class="category">'.$inrow->ru_name.'</p></a>') ;
             }
         ?>
     </div>

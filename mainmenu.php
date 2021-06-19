@@ -22,4 +22,15 @@
         <li><a href="/about.php">О нас</a></li>
         <li><a href="/rules.php">Правила</a></li>
     </ul>
+    <?php 
+    
+        if(isset($_SESSION['username'])){
+            echo '<form class="authorization" action="/logout.php" method="post">';
+            echo '<h2>Привет, '.$_SESSION['username'].'!<h2>';
+            echo '<input type="submit" class="submit" name="submit" value="Выйти">';
+            echo '</form>';
+        }else{
+            require "authmenu.php";
+        }
+    ?>
 </nav>

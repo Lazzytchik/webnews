@@ -75,6 +75,20 @@ ul.groups-list li a{
     text-decoration: none;
 }
 
+nav form.authorization{
+    display: flex;
+    flex-direction: row;
+}
+
+input{
+    margin: 0;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
 
 /* Специальный стиль для выпадающего меню */
 
@@ -156,4 +170,54 @@ nav li:hover > .submenu {
   visibility: visible;
   opacity: 1;
   transform: translateY(0px);
+}
+
+/* Стиль для кнопок и текстовых полей */
+
+input[type="text"], input[type="password"], select, input[type="submit"]{
+	background: rgb(210, 206, 201);
+	box-shadow: inset -100px -100px 0 rgb(230, 216, 211); /*Prevent yellow autofill color*/
+	color: rgb(130, 116, 111);
+}
+
+input[type="text"], input[type="password"], select, input[type="submit"]{
+	position: relative;
+	display: block;
+	width: 100%;
+	height: 45px;
+	border: 0;
+	outline: 0;
+	top: -2px;
+	padding: 0 0 0 20px;
+	font-weight: 700;
+}
+
+input[type="submit"]{
+    padding: 0px;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, select:focus, input[type="submit"]:focus{
+	color: rgb(30, 30, 30);
+}
+
+input[type="submit"]{
+	width: 200px;
+	height: 45px;
+	color: rgb(52, 56, 61);
+    border: 2px solid black;
+	outline: 0;
+	z-index: 2;
+	border: 6px solid rgb(230, 216, 211);
+	font-size: 25px;
+	text-indent: -10px;
+	padding-left: 9px;
+	padding-bottom: 3px;
+	text-align: center;
+    margin: auto;
+}
+
+input[type="submit"]:hover{
+	color: rgb(0, 0, 0);
+	text-shadow: 0 0 10px rgb(0, 126, 165);
+	cursor: pointer;
 }
