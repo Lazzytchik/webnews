@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июн 11 2021 г., 21:21
+-- Время создания: Июн 20 2021 г., 02:21
 -- Версия сервера: 8.0.19
 -- Версия PHP: 7.1.33
 
@@ -28,21 +28,23 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `categories` (
-  `name` varchar(100) NOT NULL
+  `name` varchar(100) NOT NULL,
+  `ru_name` varchar(200) NOT NULL,
+  `description` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Table with news'' categories';
 
 --
 -- Дамп данных таблицы `categories`
 --
 
-INSERT INTO `categories` (`name`) VALUES
-('Классика'),
-('Новинка'),
-('Новичкам'),
-('Обучение'),
-('Практика'),
-('Работа'),
-('Стажировка');
+INSERT INTO `categories` (`name`, `ru_name`, `description`) VALUES
+('Beginers', 'Новичкам', 'Категория для начинающих веб-программистов.'),
+('Classic', 'Классика', 'Категория с классическими для веб-програмировния статьями.'),
+('Internship', 'Стажировка', 'Статьи для тех кто хочет начать карьеру в веб-программировании.'),
+('Job', 'Работа', 'Статьи для тех кто хочет найти работу.'),
+('Learning', 'Обучение', 'Категория для тех кто хочет изучить что-то новое.'),
+('New', 'Новинка', 'Категория с самыми свежими статьями веб-програмирования.'),
+('Practice', 'Практика', 'Категория со статьями практического толка. ');
 
 -- --------------------------------------------------------
 
@@ -60,32 +62,32 @@ CREATE TABLE `categorized_news` (
 --
 
 INSERT INTO `categorized_news` (`news_id`, `cat_name`) VALUES
-(1, 'Классика'),
-(2, 'Новинка'),
-(3, 'Новинка'),
-(4, 'Новинка'),
-(5, 'Новинка'),
-(6, 'Новинка'),
-(7, 'Новинка'),
-(1, 'Новичкам'),
-(8, 'Новичкам'),
-(9, 'Новичкам'),
-(2, 'Обучение'),
-(3, 'Обучение'),
-(4, 'Обучение'),
-(5, 'Обучение'),
-(6, 'Обучение'),
-(7, 'Обучение'),
-(8, 'Обучение'),
-(9, 'Обучение'),
-(4, 'Практика'),
-(5, 'Практика'),
-(6, 'Практика'),
-(8, 'Практика'),
-(2, 'Работа'),
-(5, 'Работа'),
-(7, 'Работа'),
-(9, 'Работа');
+(1, 'Beginers'),
+(8, 'Beginers'),
+(9, 'Beginers'),
+(1, 'Classic'),
+(2, 'Job'),
+(5, 'Job'),
+(7, 'Job'),
+(9, 'Job'),
+(2, 'Learning'),
+(3, 'Learning'),
+(4, 'Learning'),
+(5, 'Learning'),
+(6, 'Learning'),
+(7, 'Learning'),
+(8, 'Learning'),
+(9, 'Learning'),
+(2, 'New'),
+(3, 'New'),
+(4, 'New'),
+(5, 'New'),
+(6, 'New'),
+(7, 'New'),
+(4, 'Practice'),
+(5, 'Practice'),
+(6, 'Practice'),
+(8, 'Practice');
 
 -- --------------------------------------------------------
 
@@ -94,19 +96,20 @@ INSERT INTO `categorized_news` (`news_id`, `cat_name`) VALUES
 --
 
 CREATE TABLE `groups` (
-  `name` varchar(100) NOT NULL
+  `name` varchar(100) NOT NULL,
+  `description` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Table with news'' groups';
 
 --
 -- Дамп данных таблицы `groups`
 --
 
-INSERT INTO `groups` (`name`) VALUES
-('html'),
-('javascript'),
-('php'),
-('ruby'),
-('typescript');
+INSERT INTO `groups` (`name`, `description`) VALUES
+('html', 'Группа статей посвящённая языку разметки html.'),
+('javascript', 'Группа посвящённая языку программирования JavaScript.'),
+('php', 'Группа новостей посвящённая языку программирования PHP.'),
+('ruby', 'Группа новостей посвящённая языку программирования Ruby.'),
+('typescript', 'Группа статей посвящённая языку программирования TypeScript.');
 
 -- --------------------------------------------------------
 
@@ -145,8 +148,16 @@ INSERT INTO `news` (`id`, `title`, `text`, `post_date`, `group_name`) VALUES
 
 CREATE TABLE `users` (
   `Login` varchar(50) NOT NULL,
-  `Hashpassword` varchar(60) NOT NULL
+  `Hash_password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Table with users'' credentials';
+
+--
+-- Дамп данных таблицы `users`
+--
+
+INSERT INTO `users` (`Login`, `Hash_password`) VALUES
+('admin', '$2y$10$sqGGgHJRGyJlq8xP/3VwHeZSHaYqmnyyROPnBpIUIgYlbJ2azkw/i'),
+('lazzy', '1234');
 
 --
 -- Индексы сохранённых таблиц
